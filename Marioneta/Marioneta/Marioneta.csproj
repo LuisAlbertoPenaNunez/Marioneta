@@ -31,20 +31,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Layouts\MRelativeLayout\MRelativeLayout.cs" />
-    <Compile Include="Layouts\MRelativeLayout\IRelativeTemplate.cs" />
-    <Compile Include="Layouts\MRelativeLayout\Transaction.cs" />
-    <Compile Include="Layouts\MRelativeLayout\ExpandViewDirection.cs" />
-    <Compile Include="Layouts\MRelativeLayout\IMLayout.cs" />
-    <Compile Include="Layouts\MRelativeLayout\LoginScreenTemplate.cs" />
-    <Compile Include="Layouts\MRelativeLayout\AlignViewDirectionX.cs" />
-    <Compile Include="Layouts\MRelativeLayout\AlignViewDirectionY.cs" />
+    <Compile Include="Layouts\Exceptions\DuplicatedViewException.cs" />
+    <Compile Include="Layouts\MRelativeLayout\RelativeBuilder.cs" />
+    <Compile Include="Layouts\MRelativeLayout\RelativeBuilderTransactionManager.cs" />
+    <Compile Include="Layouts\Shared\ITransactionManager.cs" />
+    <Compile Include="Layouts\Shared\IBuilder.cs" />
+    <Compile Include="Layouts\Shared\Transaction.cs" />
+    <Compile Include="Layouts\Shared\ViewDirectionX.cs" />
+    <Compile Include="Layouts\Shared\ViewDirectionY.cs" />
+    <Compile Include="Layouts\Shared\ExpandViewDirectionX.cs" />
+    <Compile Include="Layouts\Shared\ExpandViewDirectionY.cs" />
+    <Compile Include="Layouts\Shared\ViewSize.cs" />
+    <Compile Include="Layouts\Shared\Dimension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.0.0.6484\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.0.6484\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
     <Folder Include="Layouts\" />
     <Folder Include="Layouts\MRelativeLayout\" />
+    <Folder Include="Layouts\Exceptions\" />
+    <Folder Include="Layouts\Shared\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

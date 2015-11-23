@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace Marioneta
 {
-	public interface IMLayout
+	public interface IBuilder
 	{
 		View BuildLayout();
 	}
