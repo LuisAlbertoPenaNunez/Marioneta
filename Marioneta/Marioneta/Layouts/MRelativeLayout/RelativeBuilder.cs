@@ -20,7 +20,7 @@ namespace Marioneta
 			propertyChanging: (bindable, oldValue, newValue) => 
 			{
 				var ctrl = (RelativeBuilder) bindable;
-
+				
 				ctrl.BackgroundColor = newValue;
 		});
 		
@@ -190,11 +190,6 @@ namespace Marioneta
 		/// <param name="newView">New view.</param>
         void ChangeContext(View newView)
         {
-            if (_lastViewAddedToCollection != null)
-            {
-                _lastViewAddedToCollection = null;
-            }
-
 			_lastViewAddedToCollection = newView;
         }
 
@@ -455,9 +450,6 @@ namespace Marioneta
 		/// <param name="thickness">A value type holding the padding parameters</param>
 		public RelativeBuilder WithPadding(Thickness thickness)
         {
-			if (thickness.Equals(default(Thickness)))
-				throw new ArgumentNullException("thickness");
-
 			var transaction = _transactionManager.GetTransactionFor(_lastViewAddedToCollection);
 
 			transaction.Padding = thickness;
@@ -489,9 +481,11 @@ namespace Marioneta
 			return this;
 		}
 
-		public void ApplyConfiguration(Action<RelativeLayout, View> view)
+		public RelativeBuilder ApplyConfiguration(Action<RelativeLayout, View> view)
 		{
 			view(_relativeLayout, _lastViewAddedToCollection);
+
+			return this;
 		}
 
 		/// <summary>
