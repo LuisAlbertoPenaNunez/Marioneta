@@ -214,6 +214,9 @@ namespace Marioneta
 			return this;
         }
 
+		/// <summary>
+		/// Let a view expand between two views vertically
+		/// </summary>
         public RelativeBuilder ExpandViewVerticallyBetween(View top, View bottom)
         {
 			if (top == null)
@@ -296,56 +299,89 @@ namespace Marioneta
             return this;
         }
 
+		/// <summary>
+		/// Aligns the view to the left of the sibling
+		/// </summary>
 		public RelativeBuilder AlignLeft (View sibling)
 		{
 			return AlignViewRelativeToX(sibling, ViewDirectionX.AlignLeft);
 		}
 
+		/// <summary>
+		/// Aligns the view to the top of the sibling
+		/// </summary>
 		public RelativeBuilder AlignTop (View sibling)
 		{
 			return AlignViewRelativeToY(sibling, ViewDirectionY.AlignAbove);
 		}
 
+		/// <summary>
+		/// Aligns the view to the right of the sibling
+		/// </summary>
 		public RelativeBuilder AlignRight (View sibling)
 		{
 			return AlignViewRelativeToX(sibling, ViewDirectionX.AlignRight);
 		}
 
+		/// <summary>
+		/// Aligns the view to the bottom of the sibling
+		/// </summary>
 		public RelativeBuilder AlignBottom (View sibling)
 		{
 			return AlignViewRelativeToY(sibling, ViewDirectionY.AlignBottom);
 		}
 
+		/// <summary>
+		/// Put the view below of the sibling
+		/// </summary>
 		public RelativeBuilder BelowOf(View sibling)
         {
 			return AlignViewRelativeToY(sibling, ViewDirectionY.BelowOf);
         }
 
+		/// <summary>
+		/// Put the view above of the sibling
+		/// </summary>
 		public RelativeBuilder AboveOf(View sibling)
         {
 			return AlignViewRelativeToY(sibling, ViewDirectionY.AboveOf);
         }
 
+		/// <summary>
+		/// Put the view to the left of the sibling
+		/// </summary>
 		public RelativeBuilder ToLeftOf(View sibling)
         {
 			return AlignViewRelativeToX(sibling, ViewDirectionX.LeftOf);
         }
 
+		/// <summary>
+		/// Put the view to the right of the sibling
+		/// </summary>
 		public RelativeBuilder ToRightOf(View sibling)
         {
 			return AlignViewRelativeToX(sibling, ViewDirectionX.RightOf);
         }
 
+		/// <summary>
+		/// Expand the view to parent width
+		/// </summary>
 		public RelativeBuilder ExpandViewToParentWidth()
 		{
 			return ExpandViewToParentX(_lastViewAddedToCollection);
 		}
 
+		/// <summary>
+		/// Expand the view to parent height
+		/// </summary>
 		public RelativeBuilder ExpandViewToParentHeight()
 		{
 			return ExpandViewToParentY(_lastViewAddedToCollection);
 		}
 
+		/// <summary>
+		/// Expand the view to parent width and height
+		/// </summary>
 		public RelativeBuilder ExpandViewToParentXY()
 		{
 			ExpandViewToParentX(_lastViewAddedToCollection);
@@ -457,6 +493,9 @@ namespace Marioneta
             return this;
         }
 
+		/// <summary>
+		/// Set a dimension to the view
+		/// </summary>
 		public RelativeBuilder WithDimension(double width, double height)
 		{
 			return WithDimension
@@ -481,6 +520,9 @@ namespace Marioneta
 			return this;
 		}
 
+		/// <summary>
+		/// This method returns the layout and the view being operating on
+		/// </summary>
 		public RelativeBuilder ApplyConfiguration(Action<RelativeLayout, View> view)
 		{
 			view(_relativeLayout, _lastViewAddedToCollection);

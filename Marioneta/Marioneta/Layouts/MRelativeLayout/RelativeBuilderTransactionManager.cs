@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace Marioneta
 {
+	/// <summary>
+	/// Relative builder transaction manager manage how the rendered layout will look.
+	/// </summary>
 	public class RelativeBuilderTransactionManager : ITransactionManager
 	{
 		IDictionary<View, Transaction> _transactions;
