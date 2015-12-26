@@ -1,1 +1,0 @@
-nuget pack Marioneta\Marioneta.csproj -Prop Configuration=Release
