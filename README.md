@@ -23,13 +23,15 @@ var builder = new RelativeBuilder();
 				.ExpandViewToParentXY();
 
 			builder
-				.AddView(startContainer)
+				.AddView(entryAndButtonContainer)
 				.AlignParentCenterXY();
 
 			return builder.BuildLayout();
 ```
 
 ![Image of Ziti](http://s23.postimg.org/kslfxm8gr/Simulator_Screen_Shot_Dec_26_2015_19_20_59.png)
+
+> This is just a preview of what you can do with it
 
 ##Basic Method Documentation
 
@@ -81,34 +83,34 @@ var builder = new RelativeBuilder();
 
     RelativeBuilder ExpandViewToParentY(View view);
 
-		RelativeBuilder AlignViewRelativeToY(View sibling, ViewDirectionY alignViewY);
+    RelativeBuilder AlignViewRelativeToY(View sibling, ViewDirectionY alignViewY);
 
-		RelativeBuilder AlignViewRelativeToX(View sibling, ViewDirectionX alignViewX);
+    RelativeBuilder AlignViewRelativeToX(View sibling, ViewDirectionX alignViewX);
 
-		RelativeBuilder AlignViewX(ViewDirectionX alignViewDirection);
+    RelativeBuilder AlignViewX(ViewDirectionX alignViewDirection);
 
-		RelativeBuilder AlignViewY(ViewDirectionY alignViewDirection);
+    RelativeBuilder AlignViewY(ViewDirectionY alignViewDirection);
 
-		RelativeBuilder ExpandViewX(ExpandViewDirectionX expandViewDirection);
+    RelativeBuilder ExpandViewX(ExpandViewDirectionX expandViewDirection);
 
-		RelativeBuilder ExpandViewY(ExpandViewDirectionY expandViewDirection);
+    RelativeBuilder ExpandViewY(ExpandViewDirectionY expandViewDirection);
 
-		RelativeBuilder WithPadding(Thickness thickness);
+    RelativeBuilder WithPadding(Thickness thickness);
 
-		RelativeBuilder WithDimension(double width, double height);
+    RelativeBuilder WithDimension(double width, double height);
 
-		RelativeBuilder WithDimension(Dimension dimension);
+    RelativeBuilder WithDimension(Dimension dimension);
 
-		RelativeBuilder ApplyConfiguration(Action<RelativeLayout, View> view);
+    RelativeBuilder ApplyConfiguration(Action<RelativeLayout, View> view);
 
     View BuildLayout();
 
-		Constraint GetXPositionFor(ViewDirectionX alignViewTo, View view, View relative, double paddingLeft);
+    Constraint GetXPositionFor(ViewDirectionX alignViewTo, View view, View relative, double paddingLeft);
 
-		Constraint GetYPositionFor(ViewDirectionY alignViewTo, View view, View relative, double paddingTop);
+    Constraint GetYPositionFor(ViewDirectionY alignViewTo, View view, View relative, double paddingTop);
 
-		Constraint GetWidthFor(ExpandViewDirectionX expandTo, double desiredWidth ,double paddingRight);
+    Constraint GetWidthFor(ExpandViewDirectionX expandTo, double desiredWidth ,double paddingRight);
 
-		Constraint GetHeightFor(ExpandViewDirectionY expandTo, double desiredHeight, double paddingBottom);
+    Constraint GetHeightFor(ExpandViewDirectionY expandTo, double desiredHeight, double paddingBottom);
 
 ```
