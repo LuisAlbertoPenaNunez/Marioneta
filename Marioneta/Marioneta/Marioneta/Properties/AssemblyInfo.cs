@@ -7,4 +7,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCopyright ("Ziti.  All rights reserved.")]
 [assembly: AssemblyProduct ("Marioneta")]
 [assembly: AssemblyInformationalVersion("1.0-beta-1")]
-[assembly: AssemblyVersion ("1.0.1.*")]
+[assembly: AssemblyVersion ("1.0.3.*")]
