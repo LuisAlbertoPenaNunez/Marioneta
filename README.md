@@ -33,7 +33,7 @@ var builder = new RelativeBuilder();
 
 > This is just a preview of what you can do with it
 
-##Basic Method Documentation
+##RelativeBuilder basic method documentation
 
 ```cs
 
