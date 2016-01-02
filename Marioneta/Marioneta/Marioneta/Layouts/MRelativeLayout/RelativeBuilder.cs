@@ -78,7 +78,7 @@ namespace Marioneta
         /// </summary>
         View _lastViewAddedToCollection;
 
-		public RelativeBuilder (bool iOSPadding = false) : this(new RelativeBuilderTransactionManager(), iOSPadding) 
+		public RelativeBuilder () : this(new RelativeBuilderTransactionManager(), false) 
 		{
 		}
 
@@ -199,37 +199,17 @@ namespace Marioneta
 		/// <returns><see cref="Marioneta.MRelativeLayout"/>.</returns>
 		/// <param name="left">Left.</param>
 		/// <param name="right">Right.</param>
-        public RelativeBuilder ExpandViewHorizontallyBetween(View left, View right)
+        RelativeBuilder ExpandViewHorizontallyBetween(View left, View right)
         {
-			if (left == null)
-				throw new ArgumentNullException("left");
-
-			if (right == null)
-				throw new ArgumentNullException("right");
-
-			AlignLeft(left);
-
-//			AlignRight(right);
-
-			return this;
+			throw new NotImplementedException();
         }
 
 		/// <summary>
 		/// Let a view expand between two views vertically
 		/// </summary>
-        public RelativeBuilder ExpandViewVerticallyBetween(View top, View bottom)
+        RelativeBuilder ExpandViewVerticallyBetween(View top, View bottom)
         {
-			if (top == null)
-				throw new ArgumentNullException("top");
-
-			if (bottom == null)
-				throw new ArgumentNullException("bottom");
-
-			AlignTop(top);
-
-//			AlignBottom(bottom);
-
-			return this;
+			throw new NotImplementedException();
         }
 
 		/// <summary>
@@ -545,16 +525,18 @@ namespace Marioneta
 				var xPosition = GetXPositionFor(transactionValues.AlignViewToX,
 					view,
 					transactionValues.RelativeView,
-					transactionValues.Padding.Left);
+					transactionValues.Padding.Left,
+					transactionValues.Padding.Right);
 
 				var yPosition = GetYPositionFor(transactionValues.AlignViewToY,
 					view,
 					transactionValues.RelativeView,
-					transactionValues.Padding.Top);
+					transactionValues.Padding.Top,
+					transactionValues.Padding.Bottom);
 
-				var width = GetWidthFor(transactionValues.ExpandToX, transactionValues.DesiredDimension.Width, transactionValues.Padding.Right);
+				var width = GetWidthFor(transactionValues.ExpandToX, transactionValues.DesiredDimension.Width);
 
-				var height = GetHeightFor(transactionValues.ExpandToY, transactionValues.DesiredDimension.Height, transactionValues.Padding.Bottom);
+				var height = GetHeightFor(transactionValues.ExpandToY, transactionValues.DesiredDimension.Height);
 
                 AddChildrenToLayout(view,
                     xPosition,
@@ -580,8 +562,10 @@ namespace Marioneta
                  heightConstraint);
         }
 
-		private Constraint GetXPositionFor(ViewDirectionX alignViewTo, View view, View relative, double paddingLeft)
+		private Constraint GetXPositionFor(ViewDirectionX alignViewTo, View view, View relative, double paddingLeft, double paddingRight)
         {
+			paddingLeft = paddingLeft - paddingRight;
+
             switch (alignViewTo)
             {
 				case ViewDirectionX.None:
@@ -623,8 +607,10 @@ namespace Marioneta
             }
         }
 
-		private Constraint GetYPositionFor(ViewDirectionY alignViewTo, View view, View relative, double paddingTop)
+		private Constraint GetYPositionFor(ViewDirectionY alignViewTo, View view, View relative, double paddingTop, double paddingBottom)
         {
+			paddingTop = paddingTop - paddingBottom;
+
             switch (alignViewTo)
             {
 			case ViewDirectionY.None:
@@ -641,7 +627,7 @@ namespace Marioneta
                     }
 			case ViewDirectionY.ParentBottom:
                     {
-						return Constraint.RelativeToView(Bottom, (p,s) => (s.Y + s.Height) + paddingTop);
+						return Constraint.RelativeToParent((p) => (p.Height) - (view.Height) + paddingTop);
                     }
 			case ViewDirectionY.BelowOf:
 					{
@@ -666,7 +652,7 @@ namespace Marioneta
             }
         }
 
-		private Constraint GetWidthFor(ExpandViewDirectionX expandTo, double desiredWidth ,double paddingRight)
+		private Constraint GetWidthFor(ExpandViewDirectionX expandTo, double desiredWidth)
         {
             switch (expandTo)
             {
@@ -682,7 +668,7 @@ namespace Marioneta
 				}
 			case ExpandViewDirectionX.ExpandParentWidth:
 				{
-					return Constraint.RelativeToParent(p => p.Width - paddingRight);
+					return Constraint.RelativeToParent(p => p.Width);
 				}
 			case ExpandViewDirectionX.ExpandViewHorizontallyBetween:
                     {
@@ -695,7 +681,7 @@ namespace Marioneta
             }
         }
 
-		private Constraint GetHeightFor(ExpandViewDirectionY expandTo, double desiredHeight, double paddingBottom)
+		private Constraint GetHeightFor(ExpandViewDirectionY expandTo, double desiredHeight)
         {
             switch (expandTo)
             {
@@ -711,7 +697,7 @@ namespace Marioneta
 				}
 			case ExpandViewDirectionY.ExpandParentHeight:
 				{
-					return Constraint.RelativeToParent(p => p.Height - paddingBottom);
+					return Constraint.RelativeToParent(p => p.Height);
 				}
 			case ExpandViewDirectionY.ExpandViewVerticallyBetween:
                     {
