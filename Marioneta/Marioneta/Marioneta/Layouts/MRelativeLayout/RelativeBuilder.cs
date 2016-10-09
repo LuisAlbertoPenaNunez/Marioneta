@@ -11,27 +11,22 @@ namespace Marioneta
 	/// RelativeBuilder is a layout builder that uses a fluent-sintax to create layout way faster than ever before!
 	/// No more constraint Yay!
 	/// </summary>
-	public class RelativeBuilder : BindableObject, IBuilder, IDisposable
+	public class RelativeBuilder : Element, IBuilder, IDisposable
 	{
-		public static BindableProperty BackgroundColorProperty = 
+		public static readonly BindableProperty BackgroundColorProperty = 
 			BindableProperty.Create<RelativeBuilder, Color>(ctrl => ctrl.BackgroundColor,
-			defaultValue: Color.White,
-			defaultBindingMode: BindingMode.OneWay,
-			propertyChanging: (bindable, oldValue, newValue) => 
-			{
-				var ctrl = (RelativeBuilder) bindable;
-				
-				ctrl.BackgroundColor = newValue;
-		});
-		
-		public Color BackgroundColor 
-		{
-			get 
-			{ 
-				return (Color)GetValue(BackgroundColorProperty); 
-			}
-			set 
-			{ 
+				defaultValue: default(Color),
+				defaultBindingMode: BindingMode.TwoWay,
+				propertyChanging: (bindable, oldValue, newValue) => {
+
+					var ctrl = (RelativeBuilder)bindable;
+
+					ctrl.BackgroundColor = newValue;
+				});
+
+		public Color BackgroundColor {
+			get { return (Color)GetValue(BackgroundColorProperty); }
+			set { 
 				SetValue (BackgroundColorProperty, value);
 
 				_relativeLayout.BackgroundColor = value;
@@ -78,17 +73,19 @@ namespace Marioneta
         /// </summary>
         View _lastViewAddedToCollection;
 
-		public RelativeBuilder () : this(new RelativeBuilderTransactionManager(), false) 
+		public RelativeBuilder() : this(new RelativeBuilderTransactionManager(),
+			false) 
 		{
+			
 		}
 
-		RelativeBuilder (ITransactionManager transactionManager, bool iOSPadding)
+		RelativeBuilder (ITransactionManager transactionManager ,bool iOSPadding)
 		{
 			_transactionManager = transactionManager;
 
 			Init(iOSPadding);
 		}
-    	
+
 		void Init (bool iOSPadding)
 		{
 			Left = new Label();
